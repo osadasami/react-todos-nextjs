@@ -45,8 +45,12 @@ const TodoApp = () => {
 				</ToolBar>
 			</AppBar>
 
-			<TodoForm addTodo={addTodo} />
-			<TodoList todos={todos} />
+			<Grid container justify="center" style={{ marginTop: '1rem' }}>
+				<Grid item xs={12} md={8} lg={4}>
+					<TodoForm addTodo={addTodo} />
+					<TodoList todos={todos} />
+				</Grid>
+			</Grid>
 		</Paper>
 	)
 }
