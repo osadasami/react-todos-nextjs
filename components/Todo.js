@@ -14,7 +14,6 @@ import useInput from 'hooks/useInput'
 const Todo = ({ todo, deleteTodo, toggleTodo, updateTodo }) => {
 	const [isEditing, toggle] = useToggle(false)
 	const [value, handleChange] = useInput(todo.task)
-	const inputRef = useRef()
 
 	const stopEditing = () => {
 		toggle()
