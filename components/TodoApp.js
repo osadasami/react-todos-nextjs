@@ -3,26 +3,34 @@ import Typography from '@material-ui/core/Typography'
 import AppBar from '@material-ui/core/AppBar'
 import ToolBar from '@material-ui/core/ToolBar'
 import Grid from '@material-ui/core/Grid'
-
-import { useState } from 'react'
+import Alert from '@material-ui/lab/Alert'
+import CircularProgress from '@material-ui/core/CircularProgress'
+import { useState, useEffect } from 'react'
+import { v4 } from 'uuid'
 
 import TodoList from 'components/TodoList'
 import TodoForm from 'components/TodoForm'
 
 const TodoApp = () => {
-	const initialState = [
-		{ id: 1, task: 'Learn React', completed: true },
-		{ id: 2, task: 'Learn Next.js', completed: false },
-		{ id: 3, task: 'Earn money', completed: false },
-	]
+	const [todos, setTodos] = useState()
 
-	const [todos, setTodos] = useState(initialState)
+	useEffect(() => {
+		setTimeout(() => {
+			setTodos(JSON.parse(localStorage.getItem('todos') || '[]'))
+		}, 500)
+	}, [])
+
+	useEffect(() => {
+		if (todos === undefined || todos === null) return
+
+		localStorage.setItem('todos', JSON.stringify(todos))
+	}, [todos])
 
 	const addTodo = (newTodoText) => {
 		setTodos((prev) => [
 			...prev,
 			{
-				id: todos.length + 1,
+				id: v4(),
 				task: newTodoText,
 				completed: false,
 			},
@@ -78,12 +86,23 @@ const TodoApp = () => {
 			<Grid container justify="center" style={{ marginTop: '1rem' }}>
 				<Grid item xs={12} md={8} lg={4}>
 					<TodoForm addTodo={addTodo} />
-					<TodoList
-						todos={todos}
-						deleteTodo={deleteTodo}
-						toggleTodo={toggleTodo}
-						updateTodo={updateTodo}
-					/>
+
+					{!todos && <CircularProgress />}
+
+					{todos && todos.length === 0 && (
+						<Alert variant="outlined" severity="info">
+							Start adding new tasks
+						</Alert>
+					)}
+
+					{todos && todos.length > 0 && (
+						<TodoList
+							todos={todos}
+							deleteTodo={deleteTodo}
+							toggleTodo={toggleTodo}
+							updateTodo={updateTodo}
+						/>
+					)}
 				</Grid>
 			</Grid>
 		</Paper>
