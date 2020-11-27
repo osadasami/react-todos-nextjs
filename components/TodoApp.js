@@ -48,6 +48,17 @@ const TodoApp = () => {
 		setTodos(newTodos)
 	}
 
+	const updateTodo = (updatingTodo, newName) => {
+		const newTodos = todos.map((mappingTodo) => {
+			if (mappingTodo.id === updatingTodo.id) {
+				return { ...mappingTodo, task: newName }
+			}
+			return mappingTodo
+		})
+
+		setTodos(newTodos)
+	}
+
 	return (
 		<Paper
 			style={{
@@ -71,6 +82,7 @@ const TodoApp = () => {
 						todos={todos}
 						deleteTodo={deleteTodo}
 						toggleTodo={toggleTodo}
+						updateTodo={updateTodo}
 					/>
 				</Grid>
 			</Grid>
