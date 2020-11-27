@@ -6,66 +6,13 @@ import Grid from '@material-ui/core/Grid'
 import Alert from '@material-ui/lab/Alert'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import { useState, useEffect } from 'react'
-import { v4 } from 'uuid'
 
+import useTodoState from 'hooks/useTodoState'
 import TodoList from 'components/TodoList'
 import TodoForm from 'components/TodoForm'
 
 const TodoApp = () => {
-	const [todos, setTodos] = useState()
-
-	useEffect(() => {
-		setTimeout(() => {
-			setTodos(JSON.parse(localStorage.getItem('todos') || '[]'))
-		}, 500)
-	}, [])
-
-	useEffect(() => {
-		if (todos === undefined || todos === null) return
-
-		localStorage.setItem('todos', JSON.stringify(todos))
-	}, [todos])
-
-	const addTodo = (newTodoText) => {
-		setTodos((prev) => [
-			...prev,
-			{
-				id: v4(),
-				task: newTodoText,
-				completed: false,
-			},
-		])
-	}
-
-	const deleteTodo = (deletingTodo) => {
-		const newTodos = todos.filter(
-			(filteringTodo) => filteringTodo.id !== deletingTodo.id
-		)
-
-		setTodos(newTodos)
-	}
-
-	const toggleTodo = (toggelingTodo) => {
-		const newTodos = todos.map((mappingTodo) => {
-			if (mappingTodo.id === toggelingTodo.id) {
-				return { ...mappingTodo, completed: !mappingTodo.completed }
-			}
-			return mappingTodo
-		})
-
-		setTodos(newTodos)
-	}
-
-	const updateTodo = (updatingTodo, newName) => {
-		const newTodos = todos.map((mappingTodo) => {
-			if (mappingTodo.id === updatingTodo.id) {
-				return { ...mappingTodo, task: newName }
-			}
-			return mappingTodo
-		})
-
-		setTodos(newTodos)
-	}
+	const { todos, addTodo, deleteTodo, toggleTodo, updateTodo } = useTodoState()
 
 	return (
 		<Paper
