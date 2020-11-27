@@ -16,12 +16,6 @@ const Todo = ({ todo, deleteTodo, toggleTodo, updateTodo }) => {
 	const [value, handleChange] = useInput(todo.task)
 	const inputRef = useRef()
 
-	useEffect(() => {
-		if (!isEditing) return
-
-		inputRef.current.focus()
-	}, [isEditing])
-
 	const stopEditing = () => {
 		toggle()
 		updateTodo(todo, value)
@@ -43,7 +37,7 @@ const Todo = ({ todo, deleteTodo, toggleTodo, updateTodo }) => {
 					value={value}
 					onChange={handleChange}
 					onBlur={stopEditing}
-					inputRef={inputRef}
+					autoFocus
 					fullWidth
 				/>
 			)}
