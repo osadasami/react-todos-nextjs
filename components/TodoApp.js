@@ -7,6 +7,7 @@ import Grid from '@material-ui/core/Grid'
 import { useState } from 'react'
 
 import TodoList from 'components/TodoList'
+import TodoForm from 'components/TodoForm'
 
 const TodoApp = () => {
 	const initialState = [
@@ -16,6 +17,17 @@ const TodoApp = () => {
 	]
 
 	const [todos, setTodos] = useState(initialState)
+
+	const addTodo = (newTodoText) => {
+		setTodos((prev) => [
+			...prev,
+			{
+				id: todos.length + 1,
+				task: newTodoText,
+				completed: false,
+			},
+		])
+	}
 
 	return (
 		<Paper
@@ -33,6 +45,7 @@ const TodoApp = () => {
 				</ToolBar>
 			</AppBar>
 
+			<TodoForm addTodo={addTodo} />
 			<TodoList todos={todos} />
 		</Paper>
 	)
