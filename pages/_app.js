@@ -1,10 +1,16 @@
+import React from 'react'
+
 import { TodosProvider } from 'contexts/TodosContext'
+import { ThemeProvider } from 'contexts/ThemeContext'
+import useThemeState from 'hooks/useThemeState'
 
 function MyApp({ Component, pageProps }) {
   return (
-    <TodosProvider>
-      <Component {...pageProps} />
-    </TodosProvider>
+    <ThemeProvider>
+      <TodosProvider>
+        <Component {...pageProps} />
+      </TodosProvider>
+    </ThemeProvider>
   )
 }
 

@@ -1,20 +1,12 @@
-import { useState, useEffect } from 'react'
 import { v4 } from 'uuid'
 
+import useLocalStorageState from 'hooks/useLocalStorageState'
+
 const useTodoState = () => {
-	const [todos, setTodos] = useState()
-
-	useEffect(() => {
-		setTimeout(() => {
-			setTodos(JSON.parse(localStorage.getItem('todos') || '[]'))
-		}, 500)
-	}, [])
-
-	useEffect(() => {
-		if (todos === undefined || todos === null) return
-
-		localStorage.setItem('todos', JSON.stringify(todos))
-	}, [todos])
+	const [todos, setTodos] = useLocalStorageState({
+		key: 'todos',
+		imitateLoading: true,
+	})
 
 	const addTodo = (newTodoText) => {
 		setTodos((prev) => [
