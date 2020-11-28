@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useContext } from 'react'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import Checkbox from '@material-ui/core/Checkbox'
@@ -10,10 +10,12 @@ import EditIcon from '@material-ui/icons/Edit'
 
 import useToggle from 'hooks/useToggle'
 import useInput from 'hooks/useInput'
+import { TodosContext } from 'contexts/TodosContext'
 
-const Todo = ({ todo, deleteTodo, toggleTodo, updateTodo }) => {
+const Todo = ({ todo }) => {
 	const [isEditing, toggle] = useToggle(false)
 	const [value, handleChange] = useInput(todo.task)
+	const { toggleTodo, updateTodo, deleteTodo } = useContext(TodosContext)
 
 	const stopEditing = () => {
 		toggle()

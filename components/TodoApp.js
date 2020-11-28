@@ -5,14 +5,15 @@ import ToolBar from '@material-ui/core/ToolBar'
 import Grid from '@material-ui/core/Grid'
 import Alert from '@material-ui/lab/Alert'
 import CircularProgress from '@material-ui/core/CircularProgress'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 
 import useTodoState from 'hooks/useTodoState'
 import TodoList from 'components/TodoList'
 import TodoForm from 'components/TodoForm'
+import { TodosContext } from 'contexts/TodosContext'
 
 const TodoApp = () => {
-	const { todos, addTodo, deleteTodo, toggleTodo, updateTodo } = useTodoState()
+	const { todos } = useContext(TodosContext)
 
 	return (
 		<Paper
@@ -32,7 +33,7 @@ const TodoApp = () => {
 
 			<Grid container justify="center" style={{ marginTop: '1rem' }}>
 				<Grid item xs={12} md={8} lg={4}>
-					<TodoForm addTodo={addTodo} />
+					<TodoForm />
 
 					{!todos && <CircularProgress />}
 
@@ -42,14 +43,7 @@ const TodoApp = () => {
 						</Alert>
 					)}
 
-					{todos && todos.length > 0 && (
-						<TodoList
-							todos={todos}
-							deleteTodo={deleteTodo}
-							toggleTodo={toggleTodo}
-							updateTodo={updateTodo}
-						/>
-					)}
+					{todos && todos.length > 0 && <TodoList todos={todos} />}
 				</Grid>
 			</Grid>
 		</Paper>
