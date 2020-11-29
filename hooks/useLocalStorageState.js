@@ -10,10 +10,10 @@ const useLocalStorageState = ({
 	useEffect(() => {
 		if (imitateLoading) {
 			setTimeout(() => {
-				setState(JSON.parse(localStorage.getItem(key) || '[]'))
+				setState(JSON.parse(localStorage.getItem(key) || initialState))
 			}, 500)
 		} else {
-			setState(JSON.parse(localStorage.getItem(key) || '[]'))
+			setState(JSON.parse(localStorage.getItem(key) || initialState))
 		}
 	}, [])
 
