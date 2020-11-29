@@ -12,7 +12,7 @@ import { TodosContext } from 'contexts/TodosContext'
 import ThemeSwitcher from './ThemeSwitcher'
 
 const TodoApp = () => {
-  const { todos } = useContext(TodosContext)
+  const todos = useContext(TodosContext)
 
   return (
     <>
@@ -41,7 +41,7 @@ const TodoApp = () => {
             </Alert>
           )}
 
-          {todos && todos.length > 0 && <TodoList todos={todos} />}
+          {todos && todos.length > 0 && <TodoList />}
         </Grid>
       </Grid>
     </>

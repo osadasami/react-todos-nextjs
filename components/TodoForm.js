@@ -3,11 +3,11 @@ import TextField from '@material-ui/core/TextField'
 import { useContext } from 'react'
 
 import useInput from 'hooks/useInput'
-import { TodosContext } from 'contexts/TodosContext'
+import { DispatchContext } from 'contexts/TodosContext'
 
 const TodoForm = () => {
 	const [value, handleChange, reset] = useInput('')
-	const { dispatch } = useContext(TodosContext)
+	const dispatch = useContext(DispatchContext)
 
 	const handleFormSubmit = (e) => {
 		e.preventDefault()
