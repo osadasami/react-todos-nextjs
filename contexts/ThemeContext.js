@@ -26,8 +26,6 @@ export const ThemeProvider = ({ children }) => {
 		[theme]
 	)
 
-	console.log(materialTheme)
-
 	return (
 		<ThemeContext.Provider value={{ theme, toggle }}>
 			<MaterialThemeProvider theme={materialTheme}>

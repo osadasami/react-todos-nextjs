@@ -7,11 +7,11 @@ import { TodosContext } from 'contexts/TodosContext'
 
 const TodoForm = () => {
 	const [value, handleChange, reset] = useInput('')
-	const { addTodo } = useContext(TodosContext)
+	const { dispatch } = useContext(TodosContext)
 
 	const handleFormSubmit = (e) => {
 		e.preventDefault()
-		addTodo(value)
+		dispatch({ type: 'ADD', task: value })
 		reset()
 	}
 
