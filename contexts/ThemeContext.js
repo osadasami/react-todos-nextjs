@@ -13,8 +13,10 @@ export const ThemeContext = createContext()
 export const ThemeProvider = ({ children }) => {
 	const { theme, toggle } = useThemeState({
 		key: 'theme',
-		initialValue: 'light',
+		initialState: 'light',
 	})
+
+	console.log(theme)
 
 	const materialTheme = useMemo(
 		() =>
